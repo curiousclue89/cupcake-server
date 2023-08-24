@@ -15,9 +15,9 @@ namespace CupcakeServer.Models
         public DbSet<UserProfile> UserProfile { get; set; }
         public DbSet<UserAddress> UserAddress { get; set; }
         public DbSet<UserCard> UserCard { get; set; }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
-        public DbSet<Payment> Payment { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
         public DbSet<ItemAttribute> ItemAttributes { get; set; }
         public DbSet<Category> Categories { get; set; }
