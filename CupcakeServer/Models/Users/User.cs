@@ -11,7 +11,6 @@ namespace CupcakeServer.Models.Users
         public string CPF { get; set; }
         public UserCredential credential { get; set; }
         public List<Order> Orders { get;set; } 
-        public List<Delivery> Deliveries { get;set; } 
 
     }
 

@@ -28,7 +28,6 @@ namespace CupcakeServer.CQRS.Commands.Users
                 userAddress.NumberStreet = command.NumberStreet;
                 userAddress.City = command.City;
                 userAddress.PostalCode = command.PostalCode;
-                userAddress.State = command.State;
 
                 context.UserAddress.Add(userAddress);
                 await context.SaveChangesAsync();

@@ -4,6 +4,7 @@ using CupcakeServer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CupcakeServer.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230906234759_quantityfield")]
+    partial class quantityfield
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,6 +55,39 @@ namespace CupcakeServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("CupcakeServer.Models.Delivery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Arrival")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Departure")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Deliveries");
                 });
 
             modelBuilder.Entity("CupcakeServer.Models.ItemCart", b =>
@@ -138,6 +173,28 @@ namespace CupcakeServer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("CupcakeServer.Models.Items.ItemAttribute", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("ItemAttributes");
                 });
 
             modelBuilder.Entity("CupcakeServer.Models.Order", b =>
@@ -285,6 +342,10 @@ namespace CupcakeServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Street")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -350,6 +411,25 @@ namespace CupcakeServer.Migrations
                     b.ToTable("UserProfile");
                 });
 
+            modelBuilder.Entity("CupcakeServer.Models.Delivery", b =>
+                {
+                    b.HasOne("CupcakeServer.Models.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CupcakeServer.Models.Users.User", "User")
+                        .WithMany("Deliveries")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("CupcakeServer.Models.ItemCart", b =>
                 {
                     b.HasOne("CupcakeServer.Models.Cart", "Cart")
@@ -397,6 +477,17 @@ namespace CupcakeServer.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CupcakeServer.Models.Items.ItemAttribute", b =>
+                {
+                    b.HasOne("CupcakeServer.Models.Items.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("CupcakeServer.Models.Order", b =>
@@ -499,6 +590,8 @@ namespace CupcakeServer.Migrations
 
             modelBuilder.Entity("CupcakeServer.Models.Users.User", b =>
                 {
+                    b.Navigation("Deliveries");
+
                     b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
