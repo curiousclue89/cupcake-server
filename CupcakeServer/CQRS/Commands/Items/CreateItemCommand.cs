@@ -8,11 +8,11 @@ namespace CupcakeServer.CQRS.Commands.Items
     public class CreateItemCommand : IRequest<int>
     {
         public int UserId { get; set; }
+        public int CategoryId { get; set; }
         public string Title { get; set; }
         public int StockAmount { get; set; }
         public string Description { get; set; }
         public string Photo { get; set; }
-        public List<ItemCategory> ItemCategories { get; set; }
 
         public class CreateItemCommandHandler : IRequestHandler<CreateItemCommand, int>
         {
@@ -25,21 +25,13 @@ namespace CupcakeServer.CQRS.Commands.Items
             {
                 var item = new Item();
                 item.UserId = command.UserId;
+                item.CategoryId = command.CategoryId;
                 item.Title = command.Title;
                 item.StockAmount = command.StockAmount;
                 item.Description = command.Description;
                 item.Photo = command.Photo;
 
                 context.Items.Add(item);
-
-                command.ItemCategories.ForEach(i =>
-                {
-                    var itemCategory = new ItemCategory();
-                    itemCategory.ItemId = item.Id;
-                    itemCategory.CategoryId = i.CategoryId;
-
-                    context.ItemCategories.Add(itemCategory);
-                });
 
                 await context.SaveChangesAsync();
                 return item.Id;

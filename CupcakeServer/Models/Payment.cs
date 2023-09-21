@@ -16,7 +16,8 @@
     public enum PaymentMethod
     {
         Card = 1,
-        PIX = 2
+        PIX = 2,
+        DINHEIRO = 3
     }
 
 }
