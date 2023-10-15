@@ -1,4 +1,5 @@
 ﻿using CupcakeServer.CQRS.Commands;
+using CupcakeServer.CQRS.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,12 @@ namespace CupcakeServer.Controllers
         public async Task<IActionResult> Create(CreateCategoryCommand command)
         {
             return Ok(await mediator.Send(command));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await mediator.Send(new GetAllCategoryQuery()));
         }
     }
 }

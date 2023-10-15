@@ -1,4 +1,5 @@
 ﻿using CupcakeServer.CQRS.Commands.Items;
+using CupcakeServer.CQRS.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,18 @@ namespace CupcakeServer.Controllers
         public async Task<IActionResult> Create(CreateItemCommand command)
         {
             return Ok(await mediator.Send(command));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await mediator.Send(new GetAllItemQuery()));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByCategoryId(int id)
+        {
+            return Ok(await mediator.Send(new GetItemByCategoryQuery { CategoryId = id }));
         }
     }
 }
