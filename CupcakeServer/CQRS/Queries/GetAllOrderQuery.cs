@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CupcakeServer.CQRS.Queries
 {
-    public class GetAllOrderQuery: IRequest<IEnumerable<Order>>
+    public class GetAllOrderQuery : IRequest<IEnumerable<Order>>
     {
         public class GetAllOrderQueryHandler : IRequestHandler<GetAllOrderQuery, IEnumerable<Order>>
         {
@@ -26,4 +26,5 @@ namespace CupcakeServer.CQRS.Queries
                 return orderList;
             }
         }
+    }
 }
