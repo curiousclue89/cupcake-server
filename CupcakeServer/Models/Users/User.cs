@@ -10,7 +10,6 @@ namespace CupcakeServer.Models.Users
         public string PhoneNumber { get; set; }
         public string CPF { get; set; }
         public UserCredential credential { get; set; }
-        public List<Order> Orders { get;set; } 
 
     }
 
