@@ -1,12 +1,14 @@
 ﻿using CupcakeServer.CQRS.Commands;
 using CupcakeServer.CQRS.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CupcakeServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CartController: ControllerBase
     {
         private IMediator mediator;

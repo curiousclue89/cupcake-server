@@ -1,6 +1,7 @@
 ﻿using CupcakeServer.CQRS.Commands.Items;
 using CupcakeServer.CQRS.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
@@ -9,6 +10,7 @@ namespace CupcakeServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ItemController: ControllerBase
     {
         private IMediator mediator;

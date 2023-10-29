@@ -7,6 +7,7 @@ namespace CupcakeServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class UserController: ControllerBase
     {
         private IMediator mediator;
@@ -16,7 +17,7 @@ namespace CupcakeServer.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        
         public async Task<IActionResult> Create(CreateUserCommand command)
         {
             return Ok(await mediator.Send(command));

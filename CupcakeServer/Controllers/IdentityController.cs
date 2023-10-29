@@ -11,9 +11,9 @@ using System.Text.Json;
 
 namespace CupcakeServer.Controllers
 {
-    [AllowAnonymous]
     [Route("api/authenticate")]
     [ApiController]
+    [AllowAnonymous]
     public class IdentityController: ControllerBase
     {
         private ApplicationDBContext context;
