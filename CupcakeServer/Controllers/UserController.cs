@@ -1,5 +1,6 @@
 ﻿using CupcakeServer.CQRS.Commands.Users;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CupcakeServer.Controllers
@@ -15,6 +16,7 @@ namespace CupcakeServer.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Create(CreateUserCommand command)
         {
             return Ok(await mediator.Send(command));

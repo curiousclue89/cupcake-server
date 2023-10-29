@@ -67,3 +67,4 @@ C:\Users\gu_so\source\repos\CupcakeServer\CupcakeServer\obj\Debug\net6.0\refint\
 C:\Users\gu_so\source\repos\CupcakeServer\CupcakeServer\obj\Debug\net6.0\CupcakeServer.pdb
 C:\Users\gu_so\source\repos\CupcakeServer\CupcakeServer\obj\Debug\net6.0\CupcakeServer.genruntimeconfig.cache
 C:\Users\gu_so\source\repos\CupcakeServer\CupcakeServer\obj\Debug\net6.0\ref\CupcakeServer.dll
+C:\Users\gu_so\source\repos\CupcakeServer\CupcakeServer\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
